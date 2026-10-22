@@ -1,0 +1,5 @@
+const menuButton=document.querySelector('.menu-toggle');
+const nav=document.querySelector('.site-nav');
+if(menuButton&&nav){menuButton.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));});}
+const checkButton=document.getElementById('check-quiz');
+if(checkButton){checkButton.addEventListener('click',()=>{const questions=[...document.querySelectorAll('.quiz-question')];let score=0;questions.forEach((q)=>{const chosen=q.querySelector('input:checked');const feedback=q.querySelector('.feedback');const correct=chosen&&chosen.value===q.dataset.answer;feedback.textContent=correct?'Correct — well done.':(chosen?'Not quite. Review the relevant exhibit and try again.':'Choose an answer to complete this question.');feedback.className='feedback '+(correct?'correct':'incorrect');if(correct)score++;});document.getElementById('quiz-score').textContent=`Your score: ${score} out of ${questions.length}. ${score===questions.length?'Excellent work!':'Review the exhibits and try again.'}`;});}
